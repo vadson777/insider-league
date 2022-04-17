@@ -1,12 +1,12 @@
 @extends('layout')
 
 @section('body')
-	<h1>{{ config('app.name') }} Simulator</h1>
+	<h1 class="my-3">{{ config('app.name') }} Simulator</h1>
 
 	@if(session()->has('message'))
-		<div class="alert alert-{{ session()->get('message.type', 'primary') }}" role="alert">
+		<x-alert type="{{ session()->get('message.type', 'primary') }}">
 			{{ session()->get('message.text') }}
-		</div>
+		</x-alert>
 	@endif
 
 	@if($teams->isNotEmpty())
@@ -150,5 +150,9 @@
 				</form>
 			@endif
 		</div>
+	@else
+		<x-alert type="danger">
+			There are no teams in a league. Have you run all migrations and seeders?
+		</x-alert>
 	@endif
 @endsection
